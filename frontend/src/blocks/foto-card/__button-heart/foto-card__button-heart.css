@@ -1,0 +1,16 @@
+.foto-card__button-heart {
+  background-color: transparent;
+  background-image: url('../../../images/icons/heart.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  width: 22px;
+  height: 19px;
+  background-size: cover;
+  margin-right: 5px;
+}
+
+.foto-card__button-heart:hover{
+  opacity: 0.5;
+}

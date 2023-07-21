@@ -1,0 +1,13 @@
+.profile__wrap {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile__wrap:hover > .profile__icon {
+  display: block;
+}
+
+
+.profile__wrap:hover > .profile__foto {
+  opacity: 0.3;
+}

@@ -1,0 +1,16 @@
+.image-error {
+  display: block;
+  margin: 0 auto;
+  padding-top: 32px;
+}
+
+.info-message {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+  max-width: 358px;
+  margin-top: 35px;
+  margin-bottom: 15px;
+  color: #000;
+}

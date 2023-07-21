@@ -1,0 +1,6 @@
+.foto-card__location {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 15px 22px 21px;
+}

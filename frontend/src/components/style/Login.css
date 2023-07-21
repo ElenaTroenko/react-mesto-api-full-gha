@@ -1,0 +1,43 @@
+.login {
+  max-width: 358px;
+  margin: 60px auto 80px;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.login__title {
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.login__form{
+  width: 100%;
+}
+
+.login__input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background-color: transparent;
+  color: #fff;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 29px 0 9px 0px;
+  font-weight: 500;
+}
+
+.login__input::placeholder {
+  color: #ccc;
+  font-weight: 400;
+}
+
+.login__button {
+  border: none;
+  margin-top: 217px;
+  width: 100%;
+  padding: 14px 84px;
+  font-size: 18px;
+  line-height: 1.2;
+  border-radius: 2px;
+}

@@ -1,0 +1,9 @@
+.popup-form__input-error {
+  color: rgba(255, 0, 0, 1);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: normal;
+  padding: 5px 0 9px 0;
+  display: none;
+  max-width: 358px;
+}

@@ -1,0 +1,16 @@
+.foto-card__basket {
+  background-image: url('../../../images/icons/Trash.svg');
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 18px;
+  height: 20px;
+  padding: 0;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.foto-card__basket:hover {
+  opacity: 0.6;
+}

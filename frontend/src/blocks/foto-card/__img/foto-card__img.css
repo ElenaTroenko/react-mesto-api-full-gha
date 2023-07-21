@@ -1,0 +1,8 @@
+.foto-card__img {
+  width: 282px;
+  height: 282px;
+  display: block;
+  background-color: #000;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+}
