@@ -7,14 +7,19 @@ const UniError = require('./utils/errors');
 const { sendError } = require('./utils/utils');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 const { DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 
 
+require('dotenv').config();
+
 // логгер запросов
 app.use(requestLogger);
+
+app.use(cors);                      // cors-middleware
 
 app.use(bodyParser.json());
 app.use('/', userRouter);           // Роутер пользователей
