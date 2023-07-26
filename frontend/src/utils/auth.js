@@ -1,7 +1,7 @@
 import api from "../utils/api.js";
 
 // Базовый путь запросов
-const BASE_URL = 'http://et-mesto.nomoredomains.xyz';
+const BASE_URL = 'https://api.et-mesto.nomoredomains.xyz';
 // Заголовки
 const headers = {
   'Content-Type': 'application/json',

@@ -9,7 +9,6 @@ const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 
-
 require('dotenv').config();
 const { PORT = 3000 } = process.env;
 const { DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;

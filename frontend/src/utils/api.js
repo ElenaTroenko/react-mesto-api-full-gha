@@ -120,9 +120,9 @@ class Api {
 const api = new Api(
   {
     baseUrls: {
-      cardsUrl: 'http://et-mesto.nomoredomains.xyz/cards',
-      userInfoUrl: 'http://et-mesto.nomoredomains.xyz/users/me',
-      userAvatarUrl: 'http://et-mesto.nomoredomains.xyz/users/me/avatar',
+      cardsUrl: 'https://api.et-mesto.nomoredomains.xyz/cards',
+      userInfoUrl: 'https://api.et-mesto.nomoredomains.xyz/users/me',
+      userAvatarUrl: 'https://api.et-mesto.nomoredomains.xyz/users/me/avatar',
     },
     headers: {
       'Content-Type': 'application/json',
