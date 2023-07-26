@@ -1,5 +1,7 @@
+import api from "../utils/api.js";
+
 // Базовый путь запросов
-const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = 'http://et-mesto.nomoredomains.xyz';
 // Заголовки
 const headers = {
   'Content-Type': 'application/json',
@@ -10,7 +12,7 @@ const getResponseData = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(res.json())
+  return Promise.reject(res.json());
 }
 
 
@@ -44,8 +46,15 @@ export const login = ({password, email}) => {
 
 // Запрос на сервер: ПРОВЕРКА ТОКЕНА
 export const checkToken = (token) => {
+
+  // Bearer токен
+  const authorization = `Bearer ${token}`;
+
   // добавить к заголовкам Bearer токен
-  headers["authorization"] = `Bearer ${token}`;
+  headers["authorization"] = authorization;
+
+  // добавить к API
+  api.addHeaders({ authorization: authorization })
 
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',

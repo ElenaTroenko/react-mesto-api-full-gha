@@ -8,9 +8,9 @@ export default function Card({card, onCardClick, onCardLike, onCardDelete}) {
   const currentUser = React.useContext(UserContext);
 
   // булево "Владелец" или нет
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
   // Булево "Лайкнуто Владельцем"
-  const isOwnLiked = card.likes.some(user => user._id === currentUser._id);
+  const isOwnLiked = card.likes.some(user => user === currentUser._id);
   // ClassName для сердечка карточки: контур или залитое
   const buttonHeartClassName = `foto-card__button-heart${isOwnLiked ? ' foto-card__button-heart_active' : ''}`;
 

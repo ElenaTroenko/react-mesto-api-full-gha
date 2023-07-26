@@ -9,6 +9,7 @@ const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 
+
 require('dotenv').config();
 const { PORT = 3000 } = process.env;
 const { DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
@@ -19,9 +20,16 @@ const app = express();
 // логгер запросов
 app.use(requestLogger);
 
+app.use(bodyParser.json());
+
 app.use(cors);                      // cors-middleware
 
-app.use(bodyParser.json());
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use('/', userRouter);           // Роутер пользователей
 app.use('/', cardRouter);           // Роутер карт
 app.use('/', () => {                // Хэндлер 404 страниц

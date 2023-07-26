@@ -16,7 +16,7 @@ import InfoTooltip from './InfoTooltip';
 import { useNavigate } from 'react-router-dom';
 import errorImage from '../images/icons/msgError.svg';
 import okImage from '../images/icons/msgOk.svg';
-import { Navigate, useHistory } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { UserContext } from '../contexts/CurrentUserContext';
 import { LoadingContext } from '../contexts/LoadingContext';
 import api from "../utils/api.js";
@@ -52,19 +52,21 @@ function App() {
       // установить информацию о пользователе
       setCurrentUser(userData);
 
+      // и последние станут первыми
+      defaultItems = defaultItems.reverse()
       // рендеринг всех карточек с сервера
       setCards(defaultItems);
     })
     .catch((err) => {
       handleError(err);
     });
-
+    
     const token = getUserToken();
     if (token) {
       checkToken(token)
-      .then((res) => {
-        if (res.data && res.data.email) {
-          setEmail(res.data.email);
+      .then((user) => {
+        if (user && user.email) {
+          setEmail(user.email);
           setLoggedIn(true);
           navigate('/');
         }
@@ -73,14 +75,14 @@ function App() {
         handleError(err);
       });
     }
-  }, []);
+  }, [loggedIn]);
 
   // Устанавливает email (стэйт), запрашивая данные на сервере
   const setUserEmailbyToken = (token) => {
     checkToken(token)
-    .then((res) => {
-      if (res.data && res.data.email) {
-        setEmail(res.data.email);
+    .then((user) => {
+      if (user && user.email) {
+        setEmail(user.email);
       }
     })
     .catch((err) => {
@@ -113,8 +115,15 @@ function App() {
     login(data)
     .then((data) => {
       if (data.token) {
+        // сохранить токен
         saveUserToken(data.token);
-        setUserEmailbyToken(data.token);
+
+        // установить заголовки API
+        api.addHeaders({ authorization: `Bearer ${data.token}` })
+
+        // установить информация о пользователе
+        api.getUserInfo().then((user) => setCurrentUser(user));
+
         setLoggedIn(true);
         navigate('/');
       } 
@@ -122,7 +131,7 @@ function App() {
     .catch((err) => {
       err.then((res)=>{
         showToolTip({
-          message: res.error ? res.error : (res.message ? res.message : 'Что-то пошло не так! Попробуйте еще раз.'),
+          message: res.message ? res.message : (res.error ? res.error : 'Что-то пошло не так! Попробуйте еще раз.'),
           image: errorImage,
           redirectTo: '',
         });
@@ -153,7 +162,7 @@ function App() {
 
     register(data)
     .then((data) => {
-      if (data.data && data.data._id) {
+      if (data.user && data.user._id) {
         showToolTip({
           message: 'Вы успешно зарегистрировались!',
           image: okImage,
@@ -164,7 +173,7 @@ function App() {
     .catch((err) => {
       err.then((res)=>{
         showToolTip({
-          message: res.error ? res.error : (res.message ? res.message : 'Что-то пошло не так! Попробуйте еще раз.'),
+          message: res.message ? res.message : (res.error ? res.error : 'Что-то пошло не так! Попробуйте еще раз.'),
           image: errorImage,
           redirectTo: '',
         });
@@ -187,7 +196,7 @@ function App() {
   // хэндлер лайка карточки
   function handleCardLike(card) {
     // Проверяем, есть ли лайк пользователя на этой карточке
-    const isLiked = card.likes.some( user => user._id === currentUser._id);
+    const isLiked = card.likes.some( owner => owner === currentUser._id);
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
     // card - текущая карта (по сердечку которой кликнули)
@@ -195,7 +204,10 @@ function App() {
     // cardElement (существующий элемент массива карт в стэйте, карта)
     api.changeLikeCardStatus(card._id, !isLiked)
     .then((newCard) => {
-      setCards(cards.map((cardElement) => cardElement._id === card._id ? newCard : cardElement));
+
+      setCards(cards.map((cardElement) => {
+        return cardElement._id === card._id ? newCard : cardElement
+      }));
     })
     .catch((err) => {
       handleError(err);

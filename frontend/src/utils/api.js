@@ -14,6 +14,14 @@ class Api {
       return Promise.reject(`${errMsg}: ${res.status}`);
     }
 
+  // добавляет заголовки для запросов
+  // ожидает на вход объект свойство-значение
+  addHeaders(headers) {
+    for (let header in headers) {
+      this._headers[header] = headers[header];
+    }
+  }
+
   // запросить карточки (требует коллбэк для передачи массива объектов-данных карточек)
   getInitialCards() {
     return fetch(this._baseUrls.cardsUrl, {
@@ -112,13 +120,12 @@ class Api {
 const api = new Api(
   {
     baseUrls: {
-      cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-64/cards',
-      userInfoUrl: 'https://nomoreparties.co/v1/cohort-64/users/me',
-      userAvatarUrl: 'https://nomoreparties.co/v1/cohort-64/users/me/avatar',
+      cardsUrl: 'http://et-mesto.nomoredomains.xyz/cards',
+      userInfoUrl: 'http://et-mesto.nomoredomains.xyz/users/me',
+      userAvatarUrl: 'http://et-mesto.nomoredomains.xyz/users/me/avatar',
     },
     headers: {
-      authorization: '7fa7d08a-8e71-4306-afc1-47a65e80e1dc',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
   }
 );
