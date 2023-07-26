@@ -77,19 +77,6 @@ function App() {
     }
   }, [loggedIn]);
 
-  // Устанавливает email (стэйт), запрашивая данные на сервере
-  const setUserEmailbyToken = (token) => {
-    checkToken(token)
-    .then((user) => {
-      if (user && user.email) {
-        setEmail(user.email);
-      }
-    })
-    .catch((err) => {
-      handleError(err);
-    })
-  }
-
   // хэндлер выхода пользователя из системы
   const handleUserExit = () => {
     localStorage.removeItem('userToken');
