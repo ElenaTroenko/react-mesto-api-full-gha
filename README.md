@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 84.201.155.217
+IP-адрес <ipv4> 84.201.155.217
 
 Frontend https://et-mesto.nomoredomains.xyz
 
