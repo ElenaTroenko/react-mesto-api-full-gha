@@ -82,7 +82,7 @@ const createUser = (req, res, next) => {
         await User.create({ name, about, avatar, email, password: hash })
           .then((user) => {
             User.findById(user._id)
-              .then((user) => res.send({user}));
+              .then((user) => res.status(201).send({user}));
           });
       } catch(err) {
         next(new UniError(err, 'создание пользователя'), res);

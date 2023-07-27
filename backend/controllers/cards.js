@@ -18,7 +18,7 @@ const createCard = (req, res, next) => {
   const owner = new mongoose.Types.ObjectId(id);
 
   Card.create({ name, link, owner })
-    .then(card => res.send(card))
+    .then(card => res.status(201).send(card))
     .catch((err) => next(new UniError(err, 'создание карточки')));
 };
 
